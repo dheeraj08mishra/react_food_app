@@ -373,3 +373,26 @@ input[type="text"]::placeholder {
     /* Lighter placeholder text */
     font-style: italic;
 }
+
+
+/* Style for the status button */
+.status-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--button-text);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: "Montserrat", sans-serif;
+    margin: 10px;
+    /* Optional: space around the button */
+}
+
+.status-button.online {
+    background-color: green;
+}
+
+.status-button.offline {
+    background-color: red;
+}

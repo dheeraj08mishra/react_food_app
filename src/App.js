@@ -1,20 +1,23 @@
-import React from "react";
+import { React, Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import "../App.css";
 import Header from "./Components/Header";
-import Body from "./Components/Body";
+// import Body from "./Components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./Components/About";
-import Contact from "./Components/Contact";
+// import Contact from "./Components/Contact";
 import Cart from "./Components/Cart";
 import ErrorDetails from "./Components/ErrorDetails";
 import RestaurantDetails from "./Components/RestaurantDetails";
+import Shimmer from "./Components/Shimmer";
+
+const Contact = lazy(() => import("./Components/Contact"));
+const Body = lazy(() => import("./Components/Body"));
 const AppLayout = () => {
   return (
     <div>
       <Header />
       <Outlet />
-      {/* <Body /> */}
     </div>
   );
 };
@@ -26,7 +29,11 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Body />
+          </Suspense>
+        ),
       },
       {
         path: "/about",
@@ -34,7 +41,12 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <Contact />,
+        // element: <Suspense fallback={<Contact />}></Suspense>,
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Contact />
+          </Suspense>
+        ),
       },
       {
         path: "/cart",
