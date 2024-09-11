@@ -1,5 +1,5 @@
 import { CDN_url } from "../utils/constants";
-const CardInfo = ({ data }) => {
+const CardDetails = ({ data }) => {
   const { avgRating, name, imageUrl, cuisines, costForTwo, deliveryTime } =
     data;
 
@@ -32,4 +32,4 @@ const CardInfo = ({ data }) => {
   );
 };
 
-export default CardInfo;
+export default CardDetails;

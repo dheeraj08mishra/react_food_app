@@ -24,50 +24,158 @@ function RestaurantDetails() {
   if (menu.length === 0) {
     return <Shimmer />;
   } else {
-    const Recommended =
+    const recommended =
       menu[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter((cardsData) => {
-        return cardsData.card.card?.title === "Recommended";
+        return (
+          cardsData.card.card?.["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        );
+      });
+
+    const completeListToShow =
+      menu[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter((cardsData) => {
+        return (
+          cardsData.card.card?.["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+        );
       });
 
     return (
-      <div className="recommended-container">
-        <h1>Recommended Dishes</h1>
-        <ul>
-          {Recommended[0]?.card?.card?.itemCards?.map((current) => {
-            const { name, imageId, description, price, defaultPrice, ratings } =
-              current.card.info;
-
+      <>
+        <div className="recommended-container">
+          {recommended.map((data, index) => {
             return (
-              <li key={name} className="recommended-item">
-                <div className="recommended-item-content">
-                  <h2>{name}</h2> {/* Main heading */}
-                  <p>{description}</p> {/* Lighter description */}
-                  {/* Price styled */}
-                  <h4 className="price">
-                    Price:{" "}
-                    <span className="price-value">
-                      ₹{price / 100 || defaultPrice / 100}
-                    </span>
-                  </h4>
-                  {/* Rating with star icon */}
-                  <h4 className="rating">
-                    {ratings?.aggregatedRating?.rating ? (
-                      <>
-                        <span className="rating-star">★</span>
-                        {ratings.aggregatedRating.rating}
-                        {` (${ratings.aggregatedRating.ratingCountV2})`}
-                      </>
-                    ) : (
-                      ""
-                    )}
-                  </h4>
-                </div>
-                <img src={CDN_url + imageId} alt={name} />
-              </li>
+              <React.Fragment key={index}>
+                <h1>
+                  {data?.card?.card?.title} ({data?.card?.card.itemCards.length}
+                  )
+                </h1>
+                <ul>
+                  {data?.card?.card?.itemCards?.map((current) => {
+                    const {
+                      name,
+                      imageId,
+                      description,
+                      price,
+                      defaultPrice,
+                      ratings,
+                      id,
+                    } = current.card.info;
+
+                    return (
+                      <li key={id} className="recommended-item">
+                        <div className="recommended-item-content">
+                          <h2>{name}</h2> {/* Main heading */}
+                          <p>{description}</p> {/* Lighter description */}
+                          <h4 className="price">
+                            Price:{" "}
+                            <span className="price-value">
+                              ₹{price / 100 || defaultPrice / 100}
+                            </span>
+                          </h4>
+                          <h4 className="rating">
+                            {ratings?.aggregatedRating?.rating ? (
+                              <>
+                                <span className="rating-star">★</span>
+                                {ratings.aggregatedRating.rating}
+                                {` (${ratings.aggregatedRating.ratingCountV2})`}
+                              </>
+                            ) : (
+                              ""
+                            )}
+                          </h4>
+                        </div>
+                        {imageId ? (
+                          <img src={CDN_url + imageId} alt={name} />
+                        ) : (
+                          <div className="placeholder-image">
+                            Image not available
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </React.Fragment>
             );
           })}
-        </ul>
-      </div>
+        </div>
+
+        <div className="complete-list-container">
+          {completeListToShow.map((data, index) => {
+            return (
+              <React.Fragment key={index}>
+                <h1>{data?.card?.card?.title}</h1>
+                <>
+                  {data.card.card.categories && (
+                    <ul>
+                      {data.card.card.categories.map((category, catIndex) => {
+                        return (
+                          <React.Fragment key={catIndex}>
+                            <h3>
+                              {category.title} ({category.itemCards.length})
+                            </h3>
+                            <ul>
+                              {category.itemCards?.map((item, itemIndex) => {
+                                const {
+                                  name,
+                                  imageId,
+                                  description,
+                                  price,
+                                  defaultPrice,
+                                  ratings,
+                                } = item.card.info;
+
+                                return (
+                                  <li
+                                    key={itemIndex}
+                                    className="recommended-item"
+                                  >
+                                    <div className="recommended-item-content">
+                                      <h2>{name}</h2>
+                                      <p>{description}</p>
+                                      <h4 className="price">
+                                        Price:{" "}
+                                        <span className="price-value">
+                                          ₹{price / 100 || defaultPrice / 100}
+                                        </span>
+                                      </h4>
+                                      <h4 className="rating">
+                                        {ratings?.aggregatedRating?.rating ? (
+                                          <>
+                                            <span className="rating-star">
+                                              ★
+                                            </span>
+                                            {ratings.aggregatedRating.rating}
+                                            {` (${ratings.aggregatedRating.ratingCountV2})`}
+                                          </>
+                                        ) : (
+                                          ""
+                                        )}
+                                      </h4>
+                                    </div>
+                                    {imageId ? (
+                                      <img src={CDN_url + imageId} alt={name} />
+                                    ) : (
+                                      <div className="placeholder-image">
+                                        Image not available
+                                      </div>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </React.Fragment>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </>
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </>
     );
   }
 }

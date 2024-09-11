@@ -1,4 +1,4 @@
-import CardInfo from "./Restaurant";
+import CardDetails from "./CardDetails";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -69,7 +69,7 @@ const Body = () => {
         ) : (
           dataToShow.map((currentRow) => (
             <Link key={currentRow.id} to={"/restaurant/" + currentRow.id}>
-              <CardInfo data={currentRow} />
+              <CardDetails data={currentRow} />
             </Link>
           ))
         )}

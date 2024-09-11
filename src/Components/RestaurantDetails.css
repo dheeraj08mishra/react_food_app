@@ -111,3 +111,145 @@ ul li {
     font-size: 1.2rem;
     font-weight: bold;
 }
+
+.placeholder-image {
+    width: 150px;
+    /* Same size as your image */
+    height: 150px;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #888;
+    border-radius: 8px;
+}
+
+.recommended-container,
+.complete-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.recommended-container h1,
+.complete-list-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.recommended-item,
+.complete-list-container ul li.recommended-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.recommended-item img,
+.complete-list-container ul li.recommended-item img {
+    max-width: 200px;
+    max-height: 150px;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+
+.recommended-item-content,
+.complete-list-container ul li.recommended-item .recommended-item-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 350px;
+}
+
+.recommended-item-content h2,
+.complete-list-container ul li.recommended-item .recommended-item-content h2 {
+    font-size: 1.8rem;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.recommended-item-content p,
+.complete-list-container ul li.recommended-item .recommended-item-content p {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #555;
+}
+
+.recommended-item-content h4.price,
+.complete-list-container ul li.recommended-item .recommended-item-content h4.price {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #333;
+    font-weight: bold;
+}
+
+.recommended-item-content .rating,
+.complete-list-container ul li.recommended-item .recommended-item-content .rating {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.rating-star {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+.price-value {
+    color: #2a9d8f;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.placeholder-image {
+    width: 150px;
+    height: 150px;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #888;
+    border-radius: 8px;
+}
+
+/* Category section titles */
+.complete-list-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: start;
+    margin-top: 1rem;
+}
+
+.recommended-item-content p,
+.complete-list-container ul li.recommended-item .recommended-item-content p {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #555;
+    word-wrap: break-word;
+    /* Ensure long words break and wrap */
+    overflow: hidden;
+    /* Prevent content from overflowing */
+    text-overflow: ellipsis;
+    /* Show ellipsis (...) for truncated text */
+    white-space: normal;
+    /* Allow text to wrap to the next line */
+    max-width: 100%;
+    /* Ensure the content stays within the container */
+}
+
+
+
+/* Ensure the hover effect and transitions are applied */
