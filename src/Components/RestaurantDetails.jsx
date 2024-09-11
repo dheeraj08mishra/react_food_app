@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import { CDN_url } from "../utils/constants";
-import "./RestaurantDetails.css"; // Import the updated CSS file
+import "./RestaurantDetails.css";
 
 function RestaurantDetails() {
   const { id } = useParams();
