@@ -250,6 +250,10 @@ ul li {
     /* Ensure the content stays within the container */
 }
 
+/* Container for image and button */
 
 
-/* Ensure the hover effect and transitions are applied */
+/* Image styling */
+.addButton {
+    width: 40%;
+}
