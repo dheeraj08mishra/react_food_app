@@ -407,3 +407,86 @@ input[type="text"]::placeholder {
     gap: 20px;
 
 }
+
+.clear-cart {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    /* color: var(--button-bg); */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: "Montserrat", sans-serif;
+    margin: 10px;
+    background-color: var(--button-bg);
+    left: 45%;
+    position: relative;
+}
+
+.total-price {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.price-value {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    /* Space between rating and quantity controls */
+}
+
+.quantity-control button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 10px;
+    /* Smaller padding */
+    font-size: 1rem;
+    /* Smaller font size */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    min-width: 30px;
+    /* Ensure button width is sufficient */
+}
+
+.quantity-control button.increment {
+    background-color: #007bff;
+    /* Blue color */
+    color: #fff;
+}
+
+.quantity-control button.increment:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+
+.quantity-control button.decrement {
+    background-color: #dc3545;
+    /* Red color */
+    color: #fff;
+}
+
+.quantity-control button.decrement:hover {
+    background-color: #c82333;
+    /* Darker red on hover */
+}
+
+.quantity-control span {
+    font-size: 1.2rem;
+    margin: 0 10px;
+    min-width: 30px;
+    text-align: center;
+}

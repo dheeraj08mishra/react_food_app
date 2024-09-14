@@ -1,29 +1,14 @@
 import React, { useState, useEffect } from "react";
 import logoImage from "../../Assets/image.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import useOnlineStatus from "./useOnlineStatus";
 
 const Header = () => {
-  const [online, setOnline] = useState(navigator.onLine);
+  const online = useOnlineStatus();
 
-  useEffect(() => {
-    const handleOnline = () => {
-      setOnline(true);
-    };
-
-    const handleOffline = () => {
-      setOnline(false);
-    };
-
-    // Add event listeners
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
-    // Cleanup event listeners on component unmount
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
-  }, []);
+  const cartItem = useSelector((state) => state.cart.items);
+  console.log(cartItem);
 
   return (
     <div className="container">
@@ -45,7 +30,7 @@ const Header = () => {
               <Link to="/about">About </Link>
             </li> */}
             <li>
-              <Link to="/cart">Cart </Link>
+              <Link to="/cart">Cart({cartItem.length} items) </Link>
             </li>
             <li>
               <Link to="/contact">Contact </Link>

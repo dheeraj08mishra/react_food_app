@@ -11,6 +11,8 @@ import ErrorDetails from "./Components/ErrorDetails";
 import RestaurantDetails from "./Components/RestaurantDetails";
 import Shimmer from "./Components/Shimmer";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 const Contact = lazy(() => import("./Components/Contact"));
 const Body = lazy(() => import("./Components/Body"));
@@ -25,12 +27,14 @@ const AppLayout = () => {
     setUserId(data.loginId);
   }, []);
   return (
-    <UserContext.Provider value={{ loggedInUser: userId }}>
-      <div>
-        <Header />
-        <Outlet />
-      </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userId }}>
+        <div>
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 

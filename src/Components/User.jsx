@@ -50,7 +50,7 @@ function User() {
             <h4>Location: {location || "N/A"}</h4>
           </div>
           <div>
-            <h4>Repositories:{public_repos}</h4>
+            <h4>Repositories:{public_repos || 0}</h4>
           </div>
         </div>
       </div>

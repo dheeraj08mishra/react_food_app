@@ -4,11 +4,21 @@ import Shimmer from "./Shimmer";
 import AccordionItem from "./AccordionItem";
 import { CDN_url } from "../utils/constants";
 import "./RestaurantDetails.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, clearCart, selectRestaurantId } from "../utils/cartSlice";
 
 function RestaurantDetails() {
   const { id } = useParams();
   const [menu, setMenu] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // const cartRestaurantId = useSelector(selectRestaurantId); // Get the restaurantId from the Redux store
+  const dispatch = useDispatch();
+  let cartRestaurantId = useSelector((state) => state.cart.restaurantId);
+  console.log(
+    "Current cart state:",
+    useSelector((state) => state.cart)
+  );
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -45,7 +55,48 @@ function RestaurantDetails() {
     });
 
   const handleClickShow = (index) => {
-    setActiveIndex(index === activeIndex ? null : index); // Toggle accordion
+    setActiveIndex((prevIndex) => (prevIndex === index ? -1 : index));
+  };
+
+  const handleAddItems = (item, clickedId) => {
+    console.log("Item added to cart by dispatching action");
+
+    // Extract the item that matches the clicked ID
+    let itemData = item.card.card.itemCards.filter((currentRecord) => {
+      const { id } = currentRecord.card.info;
+      return clickedId === id;
+    });
+
+    const selectedItem = itemData[0]; // Assuming only one matching item
+    const itemToAdd = {
+      ...selectedItem.card.info,
+      restaurantId: id, // Store the restaurantId to compare for cart items
+      quantity: 1, // Initialize with quantity 1
+    };
+
+    // Get current cart restaurant ID from the store
+
+    // Check for items from a different restaurant
+    if (cartRestaurantId && cartRestaurantId !== id) {
+      if (
+        window.confirm(
+          "Your cart contains items from another restaurant. Do you want to clear the cart and add items from this restaurant?"
+        )
+      ) {
+        // Clear the cart and add the new item
+        dispatch(clearCart());
+        dispatch(addToCart(itemToAdd));
+      }
+    } else {
+      // Check if the cart is empty and add the item with the new restaurant ID if necessary
+      if (cartRestaurantId === null || cartRestaurantId === id) {
+        dispatch(addToCart(itemToAdd));
+      } else {
+        // If cart is not empty but restaurant ID is different, clear the cart first
+        dispatch(clearCart());
+        dispatch(addToCart(itemToAdd));
+      }
+    }
   };
 
   return (
@@ -85,7 +136,12 @@ function RestaurantDetails() {
                         </>
                       )}
                     </h4>
-                    <button className="addButton">Add</button>
+                    <button
+                      className="addButton"
+                      onClick={() => handleAddItems(data, id)}
+                    >
+                      Add
+                    </button>
                   </div>
 
                   {imageId ? (
@@ -143,7 +199,12 @@ function RestaurantDetails() {
                               </>
                             )}
                           </h4>
-                          <button className="addButton">Add</button>
+                          <button
+                            className="addButton"
+                            onClick={() => handleAddItems(item, id)}
+                          >
+                            Add
+                          </button>
                         </div>
                         {imageId ? (
                           <img src={CDN_url + imageId} alt={name} />

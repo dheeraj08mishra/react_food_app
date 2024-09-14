@@ -2,14 +2,14 @@ import CardDetails from "./CardDetails";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import useStatus from "./useStatus";
+// import useStatus from "./useStatus";
 import useResponse from "./useResponse";
 
 const Body = () => {
   // State to manage the data to be displayed (filtered or full)
   const [dataToShow, setDataToShow] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const [status, toggleStatus] = useStatus(); // Custom hook to toggle login/logout status
+  // const [status, toggleStatus] = useStatus(); // Custom hook to toggle login/logout status
 
   // Fetch the initial data using custom hook
   const { data } = useResponse();
@@ -56,7 +56,7 @@ const Body = () => {
       <button onClick={searchUpdatedClick}>Search</button>
       <button onClick={showTopRated}>Top Rated</button>
       <button onClick={restoreData}>Reset</button>
-      <button onClick={toggleStatus}>{status}</button>{" "}
+      {/* <button onClick={toggleStatus}>{status}</button>{" "} */}
       {/* Toggle login/logout status */}
       {/* Display shimmer or card data */}
       <div
