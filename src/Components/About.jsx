@@ -17,18 +17,18 @@ class About extends React.Component {
     this.state = {
       showUser: true,
     };
-    console.log("Parent constructor");
+    // console.log("Parent constructor");
   }
   componentDidMount() {
-    console.log("Parent componentDidMount");
+    // console.log("Parent componentDidMount");
   }
 
   render() {
-    console.log("Parent render");
+    // console.log("Parent render");
     return (
       <>
         <User />
-        <UserCLass userData="Dheeraj" />
+        {/* <UserCLass userData="Dheeraj" /> */}
         {/* <UserCLass userData="Dheeraj2" /> */}
       </>
     );

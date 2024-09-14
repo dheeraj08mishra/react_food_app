@@ -7,24 +7,24 @@ class UserCLass extends React.Component {
       userData: "",
     };
 
-    console.log(this.props.userData + " constructor");
+    // console.log(this.props.userData + " constructor");
   }
 
   componentDidMount() {
-    console.log(this.props.userData + " componentDidMount");
+    // console.log(this.props.userData + " componentDidMount");
     this.intervalId = setInterval(() => {
-      console.log("loading loading");
+      // console.log("loading loading");
     }, 1000);
   }
   componentWillUnmount() {
-    console.log(this.props.userData + " componentWillUnmount");
+    // console.log(this.props.userData + " componentWillUnmount");
 
     // Clear the interval when the component is about to unmount
     clearInterval(this.intervalId);
   }
 
   render() {
-    console.log(this.props.userData + " render");
+    // console.log(this.props.userData + " render");
     return <div>{/* <GrandChild calledFrom={this.props.userData} /> */}</div>;
   }
 }

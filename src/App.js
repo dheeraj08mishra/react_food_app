@@ -1,4 +1,4 @@
-import { React, Suspense, lazy } from "react";
+import { React, Suspense, lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "../App.css";
 import Header from "./Components/Header";
@@ -10,15 +10,27 @@ import Cart from "./Components/Cart";
 import ErrorDetails from "./Components/ErrorDetails";
 import RestaurantDetails from "./Components/RestaurantDetails";
 import Shimmer from "./Components/Shimmer";
+import UserContext from "./utils/UserContext";
 
 const Contact = lazy(() => import("./Components/Contact"));
 const Body = lazy(() => import("./Components/Body"));
 const AppLayout = () => {
+  const [userId, setUserId] = useState("Dheeraj");
+
+  useEffect(() => {
+    console.log("AppLayout useEffect");
+    const data = {
+      loginId: "dheeraj08mishra",
+    };
+    setUserId(data.loginId);
+  }, []);
   return (
-    <div>
-      <Header />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userId }}>
+      <div>
+        <Header />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 

@@ -17,3 +17,7 @@ yarn-error.log*
 
 # Ignore temporary files
 .DS_Store
+.parcelrc
+
+babel.config.js
+jest.config.js
