@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Montserrat&family=Sacramento&display=swap");
 
 :root {
-    font-family: "Merriweather Sans", sans-serif;
     --nav-color: #fff;
     --nav-text: #463c3c;
     --primary-color: #f3deba;
@@ -16,38 +15,36 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Merriweather Sans", sans-serif;
-    /* background-color: var(--primary-color); */
+
 }
 
 .container {
     display: flex;
-    /* Make container a flexbox */
+
     justify-content: space-between;
-    /* Distribute items with space between */
+
     align-items: center;
-    /* Vertically center the items */
+
     background-color: var(--nav-color);
     font-size: 1.2rem;
-    font-family: "Merriweather Sans", sans-serif;
     height: 70px;
     padding: 0 20px;
-    /* Optional padding to give some space */
+
 }
 
 .container img {
     width: 50px;
-    /* Control the width of the logo */
+
     height: auto;
-    /* Maintain aspect ratio */
+
 }
 
 .navBar {
     display: flex;
     justify-content: flex-end;
-    /* Align nav to the right */
+
     align-items: center;
-    /* Vertically center the nav */
+
 }
 
 .navBar ul {
@@ -72,45 +69,42 @@ body {
     color: var(--hover-color);
 }
 
-/* Style for the container holding all the cards */
 .card-container {
     padding: 0;
     margin: 32px 30px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    /* Responsive grid */
+
     gap: 40px;
-    /* Space between cards */
+
 }
 
-
-/* Style for each card */
 .card {
     display: grid;
     grid-template-rows: auto;
-    /* Layout with three rows: image, content, and footer */
+
     grid-template-columns: 1fr;
-    /* Single column layout */
+
     gap: 10px;
-    /* Space between grid items */
+
     background: #fff;
-    /* Background color for the card */
+
     border-radius: 8px;
-    /* Rounded corners */
+
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Shadow for card */
+
     overflow: hidden;
-    /* Ensure content doesn’t overflow */
+
     padding: 10px;
-    /* Padding inside the card */
+
     transition: transform 0.2s;
-    /* Smooth hover effect */
+
     max-width: 350px;
-    /* Set a maximum width for each card */
+
     width: 100%;
-    /* Ensure card width doesn't exceed its container */
+
     margin: 0 auto;
-    /* Center each card if the container has extra space */
+
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: break-spaces;
@@ -118,22 +112,19 @@ body {
     text-decoration: none;
 }
 
-/* Media query for reducing gap on smaller screens */
 @media (max-width: 768px) {
     .card-container {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 15px;
-        /* Smaller gap for mobile screens */
+
     }
 }
 
-/* Adjust gap dynamically when few cards are visible */
 .card-container.filtered {
     gap: 30px;
-    /* Increase the gap after filtering */
+
 }
 
-/* When there are fewer cards (like after filtering), center the grid and increase spacing */
 .filtered .card {
     max-width: 300px;
     margin: 0 auto;
@@ -144,43 +135,37 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     justify-content: center;
-    /* Center content horizontally */
+
 }
 
-/* Button styling remains the same */
-
-
-/* Card hover effect */
 .card:hover {
     transform: scale(1.02);
     transition: transform 0.2s ease;
-    /* Slight zoom effect on hover */
+
 }
 
-/* Style for images within cards */
 .topCard img,
 .card img {
     width: 100%;
-    /* Image covers the width of the card */
+
     height: 200px;
-    /* Fixed height for images */
+
     object-fit: cover;
-    /* Cover the container without distortion */
+
     grid-row: 1;
-    /* Place image in the first row */
+
     border-bottom: 1px solid #ddd;
     border-radius: 10px;
-    /* Optional border for separation */
+
 }
 
-/* Style for the text content within the card */
 .card-content {
     grid-row: 2;
-    /* Place text content in the second row */
+
     display: flex;
     flex-direction: column;
     gap: 5px;
-    /* Space between text items */
+
 }
 
 .card-content h3,
@@ -188,34 +173,32 @@ body {
     margin: 0;
     text-overflow: ellipsis;
     white-space: break-spaces;
-    /* Remove default margin */
+
 }
 
 .card-content h4 {
     font-size: 1rem;
-    /* Adjust font size for h4 */
+
     color: #555;
-    /* Set a subtle color for h4 */
+
 }
 
-/* Style for the footer within the card */
 .card-footer {
     grid-row: 3;
-    /* Place footer in the third row */
+
     display: flex;
     justify-content: space-between;
     font-size: 0.7rem;
-    /* Smaller font size for footer */
+
     color: #777;
-    /* Subtle color for footer */
+
 }
 
-/* Style for the rating section */
 .rating {
     display: flex;
     align-items: center;
     gap: 8px;
-    /* Space between icon and text */
+
 }
 
 .rating-icon {
@@ -228,15 +211,14 @@ body {
     background-color: #f0f0f0;
     color: #333;
     font-size: 16px;
-    /* Circle with background and icon color */
+
 }
 
-/* Style for the cost section */
 .cost {
     display: flex;
     align-items: center;
     gap: 8px;
-    /* Space between icon and text */
+
 }
 
 .cost-icon {
@@ -249,24 +231,22 @@ body {
     background-color: #f0f0f0;
     color: #333;
     font-size: 16px;
-    /* Circle with background and icon color */
+
 }
 
-/* Style for the delivery time section */
 .delivery-time {
     display: flex;
     align-items: center;
     gap: 8px;
-    /* Space between icon and text */
+
 }
 
 .delivery-time-icon {
     width: 24px;
     height: 24px;
-    /* Size of the delivery time icon */
+
 }
 
-/* Optional: If you want a circular background for the icon */
 .delivery-time-icon-container {
     display: inline-flex;
     justify-content: center;
@@ -275,12 +255,11 @@ body {
     height: 32px;
     border-radius: 50%;
     background-color: #f0f0f0;
-    /* Background color for the circle */
+
     color: #333;
-    /* Icon color */
+
 }
 
-/* Button styling */
 button {
     padding: 10px 20px;
     margin: 10px;
@@ -343,48 +322,43 @@ button:focus {
     }
 }
 
-/* Style for the search input */
 input[type="text"] {
     width: 100%;
-    /* Full width */
+
     max-width: 400px;
-    /* Restrict maximum width */
+
     padding: 10px 15px;
-    /* Padding inside the input */
+
     margin: 10px 10px;
-    /* Space around the input */
+
     border: 2px solid var(--secondary-color);
-    /* Border color matching theme */
+
     border-radius: 8px;
-    /* Rounded corners */
+
     font-size: 1rem;
-    /* Font size for input text */
+
     background-color: #fff;
-    /* White background */
+
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
+
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     font-family: "Montserrat", sans-serif;
 }
 
-/* Focus state for the search input */
 input[type="text"]:focus {
     border-color: var(--hover-color);
-    /* Change border color on focus */
+
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* Increase shadow on focus */
+
     outline: none;
 }
 
-/* Placeholder style */
 input[type="text"]::placeholder {
     color: #999;
-    /* Lighter placeholder text */
+
     font-style: italic;
 }
 
-
-/* Style for the status button */
 .status-button {
     padding: 10px 20px;
     border: none;
@@ -395,7 +369,7 @@ input[type="text"]::placeholder {
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-family: "Montserrat", sans-serif;
     margin: 10px;
-    /* Optional: space around the button */
+
 }
 
 .status-button.online {
@@ -431,8 +405,6 @@ h1 {
     margin-top: 1rem;
 }
 
-
-
 .clear-cart:hover {
     background-color: darkred;
 }
@@ -441,8 +413,6 @@ h1 {
     background-color: darkgreen;
 }
 
-
-/* General Cart Styling */
 .cart-container {
     width: 90%;
     max-width: 600px;
@@ -458,7 +428,6 @@ h1 {
     transform: scale(1.02);
 }
 
-/* Cart Header */
 .cart-header {
     display: flex;
     justify-content: space-between;
@@ -469,7 +438,6 @@ h1 {
     border-bottom: 2px solid #ddd;
 }
 
-/* Cart Items */
 .cart-items {
     margin-top: 15px;
     list-style: none;
@@ -516,7 +484,6 @@ h1 {
     font-weight: bold;
 }
 
-/* Quantity and Remove Button */
 .cart-item-actions {
     display: flex;
     align-items: center;
@@ -533,29 +500,6 @@ h1 {
     border-radius: 5px;
     transition: background 0.3s;
 }
-
-/* 
-.cart-icon {
-    font-size: 1.8rem;
-    color: #007bff;
-    transition: transform 0.3s ease-in-out;
-}
-
-.cart-count {
-    position: relative;
-    top: -5px;
-    right: -10px;
-    background: red;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 3px 7px;
-    border-radius: 50%;
-}
-
-.cart-bounce {
-    animation: bounce 0.4s ease-in-out;
-} */
 
 .quantity-btn:hover {
     background: #0056b3;
@@ -576,7 +520,6 @@ h1 {
     background: #c82333;
 }
 
-/* Cart Footer */
 .cart-footer {
     margin-top: 15px;
     padding-top: 10px;
@@ -586,7 +529,6 @@ h1 {
     font-weight: bold;
 }
 
-/* Checkout Button */
 .checkout-btn {
     display: block;
     width: 100%;
@@ -606,7 +548,6 @@ h1 {
     background: #218838;
 }
 
-/* Responsive Design */
 @media (max-width: 480px) {
     .cart-container {
         padding: 15px;
@@ -625,7 +566,6 @@ h1 {
         justify-content: center;
     }
 }
-
 
 .order-success {
     text-align: center;
@@ -715,7 +655,6 @@ h1 {
     cursor: pointer;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -740,8 +679,6 @@ h1 {
     }
 }
 
-
-/* Fade-in animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -753,8 +690,6 @@ h1 {
         transform: translateY(0);
     }
 }
-
-
 
 .total-price {
     margin-top: 20px;
@@ -778,7 +713,7 @@ h1 {
     align-items: center;
     justify-content: center;
     margin-top: 10px;
-    /* Space between rating and quantity controls */
+
 }
 
 .quantity-control button {
@@ -786,35 +721,35 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px 10px;
-    /* Smaller padding */
+
     font-size: 1rem;
-    /* Smaller font size */
+
     cursor: pointer;
     transition: background-color 0.3s;
     min-width: 30px;
-    /* Ensure button width is sufficient */
+
 }
 
 .quantity-control button.increment {
     background-color: #007bff;
-    /* Blue color */
+
     color: #fff;
 }
 
 .quantity-control button.increment:hover {
     background-color: #0056b3;
-    /* Darker blue on hover */
+
 }
 
 .quantity-control button.decrement {
     background-color: #dc3545;
-    /* Red color */
+
     color: #fff;
 }
 
 .quantity-control button.decrement:hover {
     background-color: #c82333;
-    /* Darker red on hover */
+
 }
 
 .quantity-control span {
@@ -824,8 +759,6 @@ h1 {
     text-align: center;
 }
 
-
-/* what's on your mind card */
 .what-on-mind-container {
     margin: 20px 0;
 }
@@ -833,11 +766,11 @@ h1 {
 .what-on-mind-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    /* Dynamic columns */
+
     gap: 15px;
-    /* Space between items */
+
     justify-content: center;
-    /* Center alignment */
+
     padding: 10px;
 }
 
@@ -851,8 +784,7 @@ h1 {
 
 .mind-card img {
     width: 100px;
-    /* height: 80px; */
-    /* border-radius: 50%; */
+
     object-fit: cover;
 }
 
@@ -866,9 +798,7 @@ h1 {
 }
 
 .menu-card-image img {
-    /* width: 100px; */
-    /* height: 80px; */
-    /* border-radius: 50%; */
+
     object-fit: cover;
 }
 
@@ -877,25 +807,21 @@ h2 {
     margin: 10px;
 }
 
-
-
-/* top restaurant cards */
-
 .topCard-container {
     display: flex;
     gap: 16px;
-    /* Adjust spacing between cards */
+
     overflow-x: auto;
-    /* Enable horizontal scrolling */
+
     white-space: nowrap;
     padding: 10px;
     scroll-behavior: smooth;
-    /* Optional: for smooth scrolling */
+
 }
 
 .topCard-container::-webkit-scrollbar {
     height: 8px;
-    /* Custom scrollbar height */
+
 }
 
 .topCard-container::-webkit-scrollbar-thumb {
@@ -905,9 +831,9 @@ h2 {
 
 .topCard {
     flex: 0 0 auto;
-    /* Prevent shrinking, allow horizontal flow */
+
     width: 300px;
-    /* Adjust width of each card */
+
     border-radius: 8px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -917,8 +843,6 @@ h2 {
     padding: 10px;
 }
 
-
-/* individual restaurant css */
 .recommended-container {
     display: flex;
     flex-direction: column;
@@ -942,7 +866,7 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     max-width: 600px;
-    /* Adjust the width of each item */
+
     margin-bottom: 20px;
     width: 100%;
 }
@@ -952,7 +876,7 @@ h2 {
     max-height: 150px;
     border-radius: 8px;
     margin-left: 20px;
-    /* Add space between text and image */
+
 }
 
 .recommended-item-content {
@@ -960,7 +884,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     max-width: 350px;
-    /* Limit description width */
+
 }
 
 .recommended-item-content h2 {
@@ -990,8 +914,6 @@ ul li {
     align-items: center;
 }
 
-
-/* Updated for recommended item */
 .recommended-item-content h2 {
     font-size: 1.8rem;
     margin: 10px 0;
@@ -1002,7 +924,7 @@ ul li {
     font-size: 1rem;
     margin: 5px 0;
     color: #555;
-    /* Lighter color for the description */
+
 }
 
 .recommended-item-content h4.price {
@@ -1020,22 +942,21 @@ ul li {
 
 .rating-star {
     color: #ffd700;
-    /* Gold color for the star */
+
     font-size: 1.2rem;
     margin-right: 8px;
 }
 
-/* Styling for price text */
 .price-value {
     color: #2a9d8f;
-    /* Greenish color for price */
+
     font-size: 1.2rem;
     font-weight: bold;
 }
 
 .placeholder-image {
     width: 150px;
-    /* Same size as your image */
+
     height: 150px;
     background-color: #e0e0e0;
     display: flex;
@@ -1153,7 +1074,6 @@ ul li {
     border-radius: 8px;
 }
 
-/* Category section titles */
 .complete-list-container h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
@@ -1168,26 +1088,21 @@ ul li {
     margin: 5px 0;
     color: #555;
     word-wrap: break-word;
-    /* Ensure long words break and wrap */
+
     overflow: hidden;
-    /* Prevent content from overflowing */
+
     text-overflow: ellipsis;
-    /* Show ellipsis (...) for truncated text */
+
     white-space: normal;
-    /* Allow text to wrap to the next line */
+
     max-width: 100%;
-    /* Ensure the content stays within the container */
+
 }
 
-/* Container for image and button */
-
-
-/* Image styling */
 .addButton {
     width: 40%;
 }
 
-/* Overlay to disable background actions */
 .dialog-overlay {
     position: fixed;
     top: 0;
@@ -1199,10 +1114,9 @@ ul li {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    /* Ensures it's on top of everything */
+
 }
 
-/* Dialog Box */
 .dialog-box {
     background: white;
     padding: 20px;
@@ -1214,18 +1128,15 @@ ul li {
     position: relative;
 }
 
-/* Title */
 .dialog-title {
     margin-top: 0;
     font-size: 1.5rem;
 }
 
-/* Content */
 .dialog-content {
     margin: 15px 0;
 }
 
-/* Close Button */
 .dialog-close {
     background: #ff4d4d;
     color: white;
@@ -1244,7 +1155,7 @@ ul li {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -600px;
+    left: -700px;
     width: 500px;
     height: 100%;
     overflow-y: scroll;
@@ -1254,24 +1165,15 @@ ul li {
     padding-top: 60px;
     z-index: 1000;
 
-
-
 }
 
 .sidebar.open {
     left: 0;
     z-index: 10000;
     position: fixed;
-    /* top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #02060c;
-    opacity: .7; */
+
     overflow: hidden;
 }
-
-
 
 .toggle-btn {
     background: transparent;
@@ -1300,44 +1202,8 @@ ul li {
     border-radius: 5px;
 }
 
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100%;
-    background: #333;
-    color: white;
-    transition: 0.3s;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.sidebar.open {
-    left: 0;
-}
-
-.close-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    width: 100%;
-}
-
 input[type="text"] {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
-}
-
-.gps-info button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background: green;
-    color: white;
-    border: none;
-    cursor: pointer;
 }
