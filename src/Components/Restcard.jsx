@@ -16,23 +16,23 @@ const Restcard = ({ restaurant, toApplyCssClass }) => {
           src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`}
           alt={name}
         />
-        <div className="card-content">
-          <h3>{name}</h3>
-          <h4>{cuisines.join(",")}</h4>
-        </div>
-        <div className="card-footer">
-          <div className="rating">
-            <span className="rating-icon">⭐</span>
-            <h4>{avgRating}</h4>
-          </div>
-
-          <div className="cost">
-            <span className="cost-icon">₹</span>
-            <h4>{numericCostForTwo} for two</h4>
-          </div>
-          <h4>{sla?.deliveryTime} min</h4>
-        </div>
       </Link>
+      <div className="card-content">
+        <h3>{name}</h3>
+        <h4>{cuisines.join(",")}</h4>
+      </div>
+      <div className="card-footer">
+        <div className="rating">
+          <span className="rating-icon">⭐</span>
+          <h4>{avgRating}</h4>
+        </div>
+
+        <div className="cost">
+          <span className="cost-icon">₹</span>
+          <h4>{numericCostForTwo} for two</h4>
+        </div>
+        <h4>{sla?.deliveryTime} min</h4>
+      </div>
     </div>
   );
 };
