@@ -1,83 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { CDN_url } from "../utils/constants";
-import {
-  clearCart,
-  incrementQuantity,
-  decrementQuantity,
-} from "../utils/cartSlice";
+import { clearCart, selectTotalPrice } from "../utils/cartSlice";
+import Menu from "./Menu";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const cardItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-
-  // Calculate total price
-  const totalPrice = cardItems.reduce((total, item) => {
-    const price = (item.price || item.defaultPrice || 0) / 100; // Default to 0 if price is undefined
-    return total + price * item.quantity;
-  }, 0);
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
   const handleClearCart = () => {
-    console.log("Cart cleared by dispatching action");
+    dispatch(clearCart());
+  };
+
+  const checkoutMethod = () => {
+    setOrderPlaced(true);
     dispatch(clearCart());
   };
 
   return (
     <>
-      {cardItems.length === 0 && <h2>No items in cart</h2>}
-      <button className="clear-cart" onClick={handleClearCart}>
-        Clear Cart
-      </button>
-      <div className="recommended-container">
-        {cardItems.map((item) => {
-          const { name, imageId, description, ratings, id, quantity } = item;
-          return (
-            <li key={id} className="recommended-item">
-              <div className="recommended-item-content">
-                <h2>{name}</h2>
-                <p>{description}</p>
-                <h4 className="price">
-                  Price:{" "}
-                  <span className="price-value">
-                    ₹{(item.price || item.defaultPrice) / 100}
-                  </span>
-                </h4>
-                <h4 className="rating">
-                  {ratings?.aggregatedRating?.rating && (
-                    <>
-                      <span className="rating-star">★</span>
-                      {ratings.aggregatedRating.rating}
-                      {` (${ratings.aggregatedRating.ratingCountV2})`}
-                    </>
-                  )}
-                </h4>
-                <div className="quantity-control">
-                  <button
-                    className="decrement"
-                    onClick={() => dispatch(decrementQuantity(id))}
-                  >
-                    -
-                  </button>
-                  <span>{quantity}</span>
-                  <button
-                    className="increment"
-                    onClick={() => dispatch(incrementQuantity(id))}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              {imageId && <img src={CDN_url + imageId} alt={name} />}
-            </li>
-          );
-        })}
-      </div>
-
-      {/* Total Price Section */}
-      {cardItems.length > 0 && (
-        <div className="total-price">
-          <h3>Total Price: ₹{totalPrice.toFixed(2)}</h3>
+      {orderPlaced ? (
+        <div className="order-confirmation">
+          <h2>🎉 Order Placed Successfully! 🎉</h2>
+          <p>Thank you for your order. Your delicious food is on its way! 🚀</p>
+          <Link to="/">
+            <button>Go to Home</button>
+          </Link>
         </div>
+      ) : cardItems.length === 0 ? (
+        <div className="recommended-container">
+          <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0" />
+          <h2>Your Cart is Empty</h2>
+          <Link to="/">
+            <button> Browse Restaurants Near You </button>
+          </Link>
+        </div>
+      ) : (
+        <>
+          <div className="recommended-container">
+            {cardItems.map((data) => (
+              <Menu
+                key={data.id}
+                items={data.uniqueItemAdded[0]}
+                restaurantDetailsMenu={data.restaurantDetailsMenu}
+                restaurantId={data.restaurantId}
+              />
+            ))}
+          </div>
+          {cardItems.length > 0 && (
+            <div className="total-price">
+              <h3>Total Price: ₹{selectTotalPrice(cardItems)}</h3>
+              <button className="checkout" onClick={checkoutMethod}>
+                Checkout
+              </button>
+              <button className="clear-cart" onClick={handleClearCart}>
+                Clear Cart
+              </button>
+            </div>
+          )}
+        </>
       )}
     </>
   );

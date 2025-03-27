@@ -1,81 +1,78 @@
-import { React, Suspense, lazy, useEffect, useState } from "react";
+import { React, lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "../App.css";
 import Header from "./Components/Header";
-// import Body from "./Components/Body";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import About from "./Components/About";
-// import Contact from "./Components/Contact";
-import Cart from "./Components/Cart";
+import Body from "./Components/Body";
 import ErrorDetails from "./Components/ErrorDetails";
-import RestaurantDetails from "./Components/RestaurantDetails";
 import Shimmer from "./Components/Shimmer";
-import UserContext from "./utils/UserContext";
-import { Provider } from "react-redux";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import appStore from "./utils/appStore";
+import { Provider } from "react-redux";
+import Cart from "./Components/Cart";
+import { LocationProvider } from "./utils/LocationContext";
 
-const Contact = lazy(() => import("./Components/Contact"));
-const Body = lazy(() => import("./Components/Body"));
-const AppLayout = () => {
-  const [userId, setUserId] = useState("Dheeraj");
+const UserDetails = lazy(() => import("./Components/User"));
+const RestaurantDetails = lazy(() => import("./Components/RestaurantDetails"));
+const WhatIsOnYourMindCardDetails = lazy(() =>
+  import("./Components/WhatIsOnYourMindCardDetails")
+);
 
-  useEffect(() => {
-    console.log("AppLayout useEffect");
-    const data = {
-      loginId: "dheeraj08mishra",
-    };
-    setUserId(data.loginId);
-  }, []);
+const App = () => {
   return (
     <Provider store={appStore}>
-      <UserContext.Provider value={{ loggedInUser: userId }}>
+      <LocationProvider>
         <div>
           <Header />
           <Outlet />
         </div>
-      </UserContext.Provider>
+      </LocationProvider>
     </Provider>
   );
 };
 
-const appRouter = createBrowserRouter([
+const BrowserRouter = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: <App />,
     children: [
+      { path: "/", element: <Body /> },
       {
-        path: "/",
+        path: "/user",
         element: (
           <Suspense fallback={<Shimmer />}>
-            <Body />
+            <UserDetails />
           </Suspense>
         ),
       },
       {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact",
-        // element: <Suspense fallback={<Contact />}></Suspense>,
+        path: "/restaurant/:id",
         element: (
           <Suspense fallback={<Shimmer />}>
-            <Contact />
+            <RestaurantDetails />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/collections/:collectionId",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <WhatIsOnYourMindCardDetails />
           </Suspense>
         ),
       },
       {
         path: "/cart",
-        element: <Cart />,
-      },
-      {
-        path: "/restaurant/:id",
-        element: <RestaurantDetails />,
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Cart />
+          </Suspense>
+        ),
       },
     ],
     errorElement: <ErrorDetails />,
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter} />);
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <RouterProvider router={BrowserRouter} />
+);

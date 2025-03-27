@@ -37,22 +37,29 @@ function User() {
   return (
     <div className="card-container">
       <div className="card">
-        <img src={avatar_url} alt={name} />
-        <div className="card-content">
-          <h3>Name: {name}</h3>
-          <h3>UserId: {login}</h3>
-        </div>
-        <div className="card-footer">
-          <div className="rating">
-            <h4>Company: {company || "N/A"}</h4>
+        <a
+          href={`https://github.com/${loggedInUser}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="card-link"
+        >
+          <img src={avatar_url} alt={name} />
+          <div className="card-content">
+            <h3>Name: {name}</h3>
+            <h3>UserId: {login}</h3>
           </div>
-          <div className="cost">
-            <h4>Location: {location || "N/A"}</h4>
+          <div className="card-footer">
+            <div className="rating">
+              <h4>Company: {company || "N/A"}</h4>
+            </div>
+            <div className="cost">
+              <h4>Location: {location || "N/A"}</h4>
+            </div>
+            <div>
+              <h4>Repositories:{public_repos || 0}</h4>
+            </div>
           </div>
-          <div>
-            <h4>Repositories:{public_repos || 0}</h4>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
   );

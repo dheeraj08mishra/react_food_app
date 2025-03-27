@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -8,66 +8,54 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      const { id, restaurantId } = action.payload;
+      const { itemId, uniqueItemAdded, restaurantId, restaurantDetailsMenu } =
+        action.payload;
+      state.restaurantId = restaurantId;
+      const itemIndex = state.items.findIndex((item) => item.id === itemId);
 
-      if (state.restaurantId && state.restaurantId !== restaurantId) {
-        // Clear cart if different restaurant
-        state.items = [];
-        state.restaurantId = restaurantId;
-      } else if (!state.restaurantId) {
-        state.restaurantId = restaurantId;
-      }
-
-      // Add or update item in cart
-      const existingItemIndex = state.items.findIndex((item) => item.id === id);
-
-      if (existingItemIndex >= 0) {
-        // Item already in cart, update quantity
-        state.items[existingItemIndex].quantity += action.payload.quantity;
+      if (itemIndex !== -1) {
+        state.items[itemIndex].quantity += 1;
       } else {
-        // New item, add to cart
-        state.items.push(action.payload);
+        state.items.push({
+          id: itemId,
+          quantity: 1,
+          uniqueItemAdded,
+          restaurantDetailsMenu,
+          restaurantId,
+        });
       }
     },
     clearCart: (state) => {
       state.items = [];
       state.restaurantId = null;
     },
-    incrementQuantity: (state, action) => {
-      const id = action.payload;
-      const item = state.items.find((item) => item.id === id);
-      if (item) {
-        item.quantity += 1;
-      }
-    },
-    decrementQuantity: (state, action) => {
-      const id = action.payload;
-      const itemIndex = state.items.findIndex((item) => item.id === id);
-      if (itemIndex >= 0) {
-        const item = state.items[itemIndex];
-        if (item.quantity > 1) {
-          item.quantity -= 1;
-        } else {
-          // Remove item from cart if quantity is 1
-          state.items.splice(itemIndex, 1);
-          if (state.items.length === 0) {
-            state.restaurantId = null;
-          }
+    decrementFromCart: (state, action) => {
+      const { itemId } = action.payload;
+      const itemIndex = state.items.findIndex((item) => item.id === itemId);
+      if (itemIndex !== -1) {
+        state.items[itemIndex].quantity -= 1;
+        if (state.items[itemIndex].quantity === 0) {
+          state.items = state.items.filter((item) => item.id !== itemId);
         }
       }
     },
   },
 });
 
-export const { addToCart, clearCart, incrementQuantity, decrementQuantity } =
-  cartSlice.actions;
-export const selectItems = (state) => state.cart.items;
+export const { addToCart, clearCart, decrementFromCart } = cartSlice.actions;
+export const selectTotalPrice = (state) => {
+  return state
+    .reduce((total, item) => {
+      return (
+        total +
+        ((item.uniqueItemAdded[0].card.info.price ||
+          item.uniqueItemAdded[0].card.info.defaultPrice ||
+          0) /
+          100) *
+          item.quantity
+      );
+    }, 0)
+    .toFixed(2);
+};
 export const selectRestaurantId = (state) => state.cart.restaurantId;
-export const selectTotal = (state) =>
-  state.cart.items.reduce(
-    (total, item) =>
-      total + (item.price || item.defaultPrice || 0) * item.quantity,
-    0
-  );
-
 export default cartSlice.reducer;
