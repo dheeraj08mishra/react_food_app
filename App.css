@@ -1241,7 +1241,7 @@ input[type="text"] {
 }
 
 .search-results li:hover {
-    background-color: #f1f1f1;
+    background-color: var(--hover-color);
 }
 
 .search-results li:active {
