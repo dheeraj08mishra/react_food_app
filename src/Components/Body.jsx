@@ -4,6 +4,7 @@ import WhatIsOnYourMindCard from "./WhatIsOnYourMindCard";
 import Shimmer from "./Shimmer";
 import UserContext from "../utils/UserContext";
 import LocationContext from "../utils/LocationContext";
+import { Link } from "react-router-dom";
 const Body = () => {
   const [data, setData] = useState(null);
   const [dataforFilter, setDataforFilter] = useState(null);
@@ -16,6 +17,8 @@ const Body = () => {
     useState("Top Restaurant Chain");
   const [onlineDeliveryRestaurantHeading, setOnlineDeliveryRestaurantHeading] =
     useState("Restaurants with online food delivery");
+
+  const [isLocationServiceable, setIsLocationServiceable] = useState(true);
 
   const { userName } = useContext(UserContext);
   const { lat, lng } = useContext(LocationContext);
@@ -32,28 +35,57 @@ const Body = () => {
         }
 
         const result = await response.json();
-        setData(
-          result?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants
+        let indexToCheck = 0;
+        if (result?.data?.cards[0]?.card?.card?.imageGridCards) {
+          indexToCheck = 0;
+        } else {
+          indexToCheck = 1;
+        }
+        setIsLocationServiceable(
+          result?.data?.cards[0].card.card?.title !== "Location Unserviceable"
         );
-        setDataforFilter(
-          result?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants
-        );
-
-        setWhatIsOnYourMindData(
-          result?.data?.cards[0]?.card?.card?.imageGridCards?.info
-        );
-        setTopRestaurantChainData(
-          result?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants
-        );
-        setTopRestaurantChainDataHeading(
-          result?.data?.cards[1]?.card?.card?.header?.title
-        );
-        setOnlineDeliveryRestaurantHeading(
-          result?.data?.cards[2]?.card?.card?.title
-        );
+        if (indexToCheck === 0) {
+          setWhatIsOnYourMindData(
+            result?.data?.cards[0]?.card?.card?.imageGridCards?.info
+          );
+          setTopRestaurantChainData(
+            result?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants
+          );
+          setTopRestaurantChainDataHeading(
+            result?.data?.cards[1]?.card?.card?.header?.title
+          );
+          setOnlineDeliveryRestaurantHeading(
+            result?.data?.cards[2]?.card?.card?.title
+          );
+          setData(
+            result?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants
+          );
+          setDataforFilter(
+            result?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants
+          );
+        } else {
+          setTopRestaurantChainData(
+            result?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants
+          );
+          setTopRestaurantChainDataHeading(
+            result?.data?.cards[0]?.card?.card?.header?.title
+          );
+          setOnlineDeliveryRestaurantHeading(
+            result?.data?.cards[1]?.card?.card?.title
+          );
+          setData(
+            result?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants
+          );
+          setDataforFilter(
+            result?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants
+          );
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -96,70 +128,97 @@ const Body = () => {
     setData(filteredData);
   };
 
-  return !data ? (
-    <Shimmer />
-  ) : (
+  return (
     <>
-      <input
-        type="text"
-        placeholder="Search...."
-        onChange={inputValueForFetch}
-        value={searchValue}
-      />
-      <button onClick={searchUpdatedClick}>Search</button>
-      <button className="btn" onClick={filterTopRated}>
-        Top Rated
-      </button>
-      <button className="btn" onClick={resetFilter}>
-        Reset
-      </button>
-      <div className="what-on-mind-container">
-        <h2>{userName} What's on your mind?</h2>
-        <div className="what-on-mind-list">
-          {whatIsOnYourMindData &&
-            whatIsOnYourMindData.map((currentRow) => (
-              <WhatIsOnYourMindCard
-                key={currentRow.id}
-                curatedCard={currentRow}
-              />
-            ))}
+      {loading ? (
+        <Shimmer />
+      ) : !isLocationServiceable ? (
+        <div className="recommended-container">
+          <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png" />
+          <h2>Location Unserviceable. Please try another location.</h2>
         </div>
-      </div>
-      <hr></hr>
-
-      <h2>{topRestaurantChainDataHeading}</h2>
-      <div className="what-on-mind-container">
-        <div className="topCard-container">
-          {topRestaurantChainData &&
-            topRestaurantChainData.map((currentRow) => (
-              <Restcard
-                key={currentRow.info.id}
-                restaurant={currentRow}
-                toApplyCssClass={"topCard"}
-              />
-            ))}
-        </div>
-      </div>
-      <hr></hr>
-      <h2>{onlineDeliveryRestaurantHeading}</h2>
-      <div className="card-container">
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error}</p>}
-
-        {data &&
-          data.map((restaurantsData) => (
-            <Restcard
-              key={restaurantsData.info.id}
-              restaurant={restaurantsData}
-              toApplyCssClass={"card"}
+      ) : (
+        <>
+          {/* Search and Filter Buttons */}
+          <div className="search-filter-container">
+            <input
+              type="text"
+              placeholder="Search...."
+              onChange={inputValueForFetch}
+              value={searchValue}
             />
-          ))}
-      </div>
-      <div>
-        <button className="btn" onClick={loadMore}>
-          Load More
-        </button>
-      </div>
+            <button onClick={searchUpdatedClick}>Search</button>
+            <button className="btn" onClick={filterTopRated}>
+              Top Rated
+            </button>
+            <button className="btn" onClick={resetFilter}>
+              Reset
+            </button>
+          </div>
+
+          {/* What’s on Your Mind Section */}
+          {whatIsOnYourMindData && (
+            <div className="what-on-mind-container">
+              <h2>{userName}, What's on your mind?</h2>
+              <div className="what-on-mind-list">
+                {whatIsOnYourMindData.map((currentRow) => (
+                  <WhatIsOnYourMindCard
+                    key={currentRow.id}
+                    curatedCard={currentRow}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+          <hr />
+
+          {/* Top Restaurant Chains Section */}
+          {topRestaurantChainData && (
+            <>
+              <h2>{topRestaurantChainDataHeading}</h2>
+              <div className="topCard-container">
+                {topRestaurantChainData.map((currentRow) => (
+                  <Restcard
+                    key={currentRow.info.id}
+                    restaurant={currentRow}
+                    toApplyCssClass={"topCard"}
+                  />
+                ))}
+              </div>
+              <hr />
+            </>
+          )}
+
+          {/* Online Delivery Restaurants Section */}
+          <h2>{onlineDeliveryRestaurantHeading}</h2>
+          <div className="card-container">
+            {error && <p className="error-text">Error: {error}</p>}
+
+            {data?.length > 0 ? (
+              data.map((restaurantsData) => (
+                <Restcard
+                  key={restaurantsData.info.id}
+                  restaurant={restaurantsData}
+                  toApplyCssClass={"card"}
+                />
+              ))
+            ) : (
+              <div className="recommended-container">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png" />
+                <h2>Location Unserviceable. Please try another location.</h2>
+              </div>
+            )}
+          </div>
+
+          {/* {isLocationServiceable && data?.length > 0 && (
+            <div className="load-more-container">
+              <button className="btn" onClick={loadMore}>
+                Load More
+              </button>
+            </div>
+          )} */}
+        </>
+      )}
     </>
   );
 };

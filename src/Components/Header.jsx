@@ -15,12 +15,12 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <Sidebar />
-            </li>
-            <li>
               <Link to="/">
                 <img src={logoImage} alt="Food Logo" />
               </Link>
+            </li>
+            <li>
+              <Sidebar />
             </li>
           </ul>
         </nav>
