@@ -1,4 +1,4 @@
-# 🍔 React Food App  
+ # 🍔 React Food App  
 
 🚀 **Live Demo**: [React Food App](https://reactfoodapp-mu.vercel.app/)  
 
@@ -6,12 +6,38 @@
 React Food App is a modern food ordering application that allows users to browse different cuisines, add items to their cart, and place orders seamlessly. It is built using the latest web technologies to ensure a smooth and responsive user experience.  
 
 ---
+## ✨ Screenshot  
+
+## ✨ Home Page  
+![image](https://github.com/user-attachments/assets/e7eb67ef-ab7b-4fc5-af1a-3f7a45a7ec66)
+
+![image](https://github.com/user-attachments/assets/1a4f8ad8-b3b9-46e8-ba67-1cdd65c0c1ff)
+
+## ✨ Restaurant Page
+![image](https://github.com/user-attachments/assets/7861b88d-9235-49ed-baae-bfaf3ed13d72)
+
+## ✨ Cart Page
+![image](https://github.com/user-attachments/assets/062526b6-d7e8-4b7b-975a-317552d3940d)
+
+## ✨ Empty Cart Page
+![image](https://github.com/user-attachments/assets/920a5e02-87c8-4c28-abd3-8e862a152c12)
+
+
+## ✨ Location Page
+![image](https://github.com/user-attachments/assets/d579b1b3-9606-419b-893c-53429b80b28f)
+
+
+
+
+
+
+
+
 
 ## ✨ Features  
 
 ### 🏆 User Experience  
-✅ **Beautiful UI** – Clean and modern user interface with intuitive navigation.  
-✅ **Responsive Design** – Works well on all screen sizes, including mobile devices.  
+✅ **UI** – Clean and modern user interface with intuitive navigation.  
 
 ### 🔍 Search & Filtering  
 ✅ **Real-time Search** – Users can quickly find restaurants using an instant search feature, providing relevant results as they type.  
