@@ -13,9 +13,6 @@ React Food App is a modern food ordering application that allows users to browse
 
 ![image](https://github.com/user-attachments/assets/1a4f8ad8-b3b9-46e8-ba67-1cdd65c0c1ff)
 
-## ✨ Restaurant Page
-![image](https://github.com/user-attachments/assets/7861b88d-9235-49ed-baae-bfaf3ed13d72)
-
 ## ✨ Cart Page
 ![image](https://github.com/user-attachments/assets/062526b6-d7e8-4b7b-975a-317552d3940d)
 
